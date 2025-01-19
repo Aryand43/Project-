@@ -85,11 +85,11 @@ function dynamicCategoryPrediction(predictions) {
   }
 }
 
-// Display Recommendations
 function displayRecommendations(category) {
   resultsSection.hidden = false;
   productList.innerHTML = ''; // Clear previous results
 
+  // Filter products by category
   const recommendedProducts = mockProducts.filter(product => product.category === category);
 
   if (recommendedProducts.length === 0) {
@@ -97,7 +97,14 @@ function displayRecommendations(category) {
     return;
   }
 
-  recommendedProducts.forEach(product => {
+  // Randomize the order of the recommended products
+  const shuffledProducts = recommendedProducts.sort(() => 0.5 - Math.random());
+
+  // Limit the number of products displayed (e.g., max 3)
+  const productsToShow = shuffledProducts.slice(0, 3);
+
+  // Create and display product cards
+  productsToShow.forEach(product => {
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
     productCard.innerHTML = `
@@ -107,7 +114,7 @@ function displayRecommendations(category) {
     productList.appendChild(productCard);
   });
 
-  console.log(`Displayed ${recommendedProducts.length} product(s) for category: ${category}`);
+  console.log(`Displayed ${productsToShow.length} product(s) for category: ${category}`);
 }
 
 // Utility: Convert Uploaded Image to Tensor
