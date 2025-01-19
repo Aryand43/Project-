@@ -9,11 +9,13 @@ const progressBar = document.getElementById('progress-bar');
 // Mock Product Dataset
 const mockProducts = [
   { name: 'CeraVe Moisturizing Cream', link: 'https://www.amazon.com/dp/B000YJ2SLG', category: 'Skincare' },
-  { name: 'La Roche-Posay Gentle Cleanser', link: 'https://www.amazon.com/dp/B01MSSDEPK', category: 'Skincare' },
-  { name: 'Dyson Supersonic Hair Dryer', link: 'https://www.amazon.com/dp/B01N5IV1H8', category: 'Miscellaneous' },
-  { name: 'Maybelline Matte Ink', link: 'https://www.amazon.com/dp/B071YS2JXZ', category: 'Cosmetics' },
-  { name: 'Neutrogena Sunscreen SPF 70', link: 'https://www.amazon.com/dp/B0009F3S78', category: 'Skincare' },
   { name: 'Apple AirPods Pro', link: 'https://www.amazon.com/dp/B09JQMJHXY', category: 'Miscellaneous' },
+  { name: "Paula's Choice SKIN PERFECTING 2% BHA Liquid Salicylic Acid Exfoliant", link: 'https://www.amazon.com/Paulas-Choice-SKIN-PERFECTING-Exfoliant-Facial-Blackheads/dp/B00949CTQQ/ref=sr_1_1_sspa', category: 'Skincare' },
+  { name: 'Elizabeth Arden Advanced Ceramide Capsules Daily Youth Restoring Serum', link: 'https://www.amazon.com/Elizabeth-Arden-Ceramide-Capsules-Anti-Aging/dp/B0D1G7543F/ref=sr_1_2_sspa', category: 'Skincare' },
+  { name: "Paula's Choice C15 Super Booster with 15% Vitamin C", link: 'https://www.amazon.com/Paulas-Choice-Booster-Vitamin-Brightening/dp/B00EYVSOKY/ref=sr_1_4_sspa', category: 'Skincare' },
+  { name: 'Under Eye Patches for Dark Circles & Wrinkles', link: 'https://www.amazon.com/Under-Eye-Patches-Treatments-Wrinkles/dp/B09NXS395V/ref=sr_1_8', category: 'Skincare' },
+  { name: 'Initial Necklaces - Personalized Pendant Necklace', link: 'https://www.amazon.com/Initial-Necklaces-Necklace-Personalized-Pendant/dp/B0C39R42VC/ref=sr_1_5_sspa', category: 'Accessories' },
+  { name: 'Trendsmax Initial Pendant Necklace Stainless Steel', link: 'https://www.amazon.com/Trendsmax-Initial-Pendant-Necklace-Stainless/dp/B07NN5P4C7', category: 'Accessories' }
 ];
 
 // Load the AI Model
@@ -50,12 +52,13 @@ async function handleAnalyze() {
 
     hideLoadingIndicator();
 
-    if (predictions.length > 0) {
+    if (predictions && predictions.length > 0) {
       console.log('Face detected:', predictions);
       const detectedCategory = dynamicCategoryPrediction(predictions); // Dynamically determine category
+      console.log(`Detected Category: ${detectedCategory}`);
       displayRecommendations(detectedCategory);
     } else {
-      console.log('No face detected');
+      console.log('No face detected. Defaulting to Miscellaneous category.');
       displayRecommendations('Miscellaneous'); // Default recommendation
     }
   } catch (error) {
@@ -67,12 +70,19 @@ async function handleAnalyze() {
 
 // Dynamic Category Prediction
 function dynamicCategoryPrediction(predictions) {
-  // Placeholder logic for dynamic category detection
-  const { landmarks } = predictions[0];
-  const featureSize = landmarks.length;
+  try {
+    const { landmarks } = predictions[0];
+    const featureSize = landmarks.length;
 
-  if (featureSize > 40) return 'Skincare'; // Example: More landmarks mean skincare focus
-  return 'Cosmetics'; // Default fallback category
+    if (featureSize > 40) {
+      return 'Skincare'; // Example: More landmarks mean skincare focus
+    } else {
+      return 'Accessories'; // Default fallback category for fewer landmarks
+    }
+  } catch (error) {
+    console.error('Error in dynamic category prediction:', error);
+    return 'Miscellaneous'; // Default fallback category on error
+  }
 }
 
 // Display Recommendations
@@ -96,6 +106,8 @@ function displayRecommendations(category) {
     `;
     productList.appendChild(productCard);
   });
+
+  console.log(`Displayed ${recommendedProducts.length} product(s) for category: ${category}`);
 }
 
 // Utility: Convert Uploaded Image to Tensor
@@ -137,19 +149,7 @@ function hideLoadingIndicator() {
   setTimeout(() => (progressBar.style.width = '0%'), 1000); // Reset after 1s
 }
 
-// Utility: Debounced Log for Performance Insights
-function debounce(fn, delay) {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), delay);
-  };
-}
-
-// Advanced Logging for Debugging
+// Debugging Logs
 function logDebugInfo(message) {
   console.log(`%c${message}`, 'color: #ffcc00; font-weight: bold;');
 }
-
-// Future Enhancements Placeholder
-// Add interactivity for advanced category detection
