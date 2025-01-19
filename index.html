@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BestMatch.AI</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- TensorFlow.js and BlazeFace -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+</head>
+<body>
+  <header>
+    <nav aria-label="Main Navigation">
+      <div class="nav-container">
+        <h1 class="logo">BestMatch<span>.AI</span></h1>
+        <ul id="nav-menu" class="nav-menu" role="menu">
+          <li><a href="#hero" role="menuitem">Home</a></li>
+          <li><a href="#about" role="menuitem">About</a></li>
+          <li><a href="#upload-section" role="menuitem">Try It</a></li>
+          <li><a href="#contact" role="menuitem">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent), url('assets/hero-bg.jpg') center/cover no-repeat;">
+    <div class="hero-content">
+      <h2 class="animate-slide-in">Revolutionize Your Shopping Experience</h2>
+      <p class="animate-fade-in">AI-powered personalized product recommendations tailored to your unique needs.</p>
+      <a href="#upload-section" class="btn primary animate-bounce">Get Started</a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <div class="indicator"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="content-section">
+    <h2>About BestMatch.AI</h2>
+    <p>Discover how our AI-driven platform provides personalized product recommendations.</p>
+    <div class="features">
+      <div class="feature">
+        <img src="assets/rocket.svg" alt="AI-Powered" class="responsive-img">
+        <h3>AI-Powered</h3>
+        <p>Advanced algorithms for real-time analysis.</p>
+      </div>
+      <div class="feature">
+        <img src="assets/shopping-cart.svg" alt="Personalized" class="responsive-img">
+        <h3>Personalized</h3>
+        <p>Tailored recommendations to fit your needs.</p>
+      </div>
+      <div class="feature">
+        <img src="assets/lock.svg" alt="Secure" class="responsive-img">
+        <h3>Secure</h3>
+        <p>Privacy-focused, no data is stored.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights Section -->
+  <section id="highlights" class="content-section futuristic-section">
+    <h2>Why Choose BestMatch.AI?</h2>
+    <div class="highlights-grid">
+      <div class="highlight">
+        <h3>Real-Time Analysis</h3>
+        <p>Our AI delivers instant results without delays.</p>
+      </div>
+      <div class="highlight">
+        <h3>Interactive UI</h3>
+        <p>A sleek, modern design tailored for ease of use.</p>
+      </div>
+      <div class="highlight">
+        <h3>Cross-Platform</h3>
+        <p>Works seamlessly across devices and browsers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Try It Section -->
+  <section id="upload-section" class="content-section">
+    <h2>Try It Now</h2>
+    <p>Let our AI analyze your features and recommend the best products for you.</p>
+    <div class="upload-container">
+      <input type="file" id="image-upload" accept="image/*" aria-label="Upload an image for analysis">
+      <div id="progress-bar-container" aria-live="polite">
+        <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <button id="analyze-btn" class="btn primary">Analyze</button>
+    </div>
+    <section id="results-section" hidden aria-live="polite">
+      <h2>Recommended Products</h2>
+      <div id="product-list" class="product-grid"></div>
+      <button id="reset-btn" class="btn secondary">Reset</button>
+    </section>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="content-section">
+    <div class="content-wrapper">
+      <h2>Contact Us</h2>
+      <p>Have questions or feedback? Reach out to us!</p>
+      <form id="contact-form" aria-label="Contact Form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn primary">Send Message</button>
+      </form>
+    </div>
+  </section>  
+
+  <!-- FAQ Section -->
+  <section id="faq" class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How does BestMatch.AI work?</summary>
+      <p>BestMatch.AI uses advanced AI to analyze your facial features and provide tailored product recommendations.</p>
+    </details>
+    <details>
+      <summary>Is my data secure?</summary>
+      <p>Yes, all data processing is done on-device, and we do not store any personal data.</p>
+    </details>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="content-wrapper">
+      <p>&copy; 2025 BestMatch.AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- External JS -->
+  <script src="script.js" defer></script>
+</body>
+</html>
